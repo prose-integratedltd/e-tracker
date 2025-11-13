@@ -1,0 +1,13 @@
+node_modules
+dist
+README.md
+Dockerfile
+
+.dockerignore
+.git
+.package-lock.json
+.eslintrc.js
+.DS_Store
+.gitignore
+.git
+.vercel

@@ -1,0 +1,281 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-arm64-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String            @id @default(uuid())
+  uId                 String            @unique
+  username            String            @unique
+  email               String            @unique
+  fullname            String
+  phoneNumber         String?
+  departmentId        String
+  department          Department        @relation(fields: [departmentId], references: [id])
+  operationLocationId String
+  operationLocation   OperationLocation @relation(fields: [operationLocationId], references: [id])
+  roles               Role[]
+  password            String
+  suspended           Boolean           @default(false)
+
+  profilePicture String?
+
+  updatedAt    DateTime?
+  createdAt    DateTime       @default(now())
+  Notification Notification[]
+
+  @@map("users")
+}
+
+model Department {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+
+  @@map("departments")
+}
+
+model OperationLocation {
+  id    String @id @default(uuid())
+  name  String @unique
+  users User[]
+
+  @@map("operation_locations")
+}
+
+enum Role {
+  user
+  admin
+}
+
+model JobModel {
+  id          String       @id @default(uuid())
+  jId         String       @unique
+  typeId      String
+  type        JobModelType @relation(fields: [typeId], references: [id])
+  clientName  String
+  name        String?
+  description String?
+  status      JobStatus
+  date        String?
+
+  // Custom Clearance, Warehouse and Transportation
+  goodsType String?
+
+  // Packing & moving and Transport
+  moreLocations    Json?
+  deliveryLocation Json?
+
+  // Car Hire only
+  vehicleType    String?
+  carServiceType String?
+  passenger      String?
+
+  // Custom Clearance only
+  shipmentType                 String?
+  clearingType                 String?
+  stateAvailableDocumentations String?
+
+  // Packing and Moving
+  movementType    String?
+  packingLocation Json?
+
+  // Transportation only
+  transportMode     TransportMode?
+  transportSystem   String?
+  pickupLocation    Json?
+  dropOffLocation   Json?
+  driverName        String?
+  driverPhoneNumber String?
+  driverLicense     String?
+  driverDateOfBirth String?
+
+  // Warehouse only
+  warehouseSize          String?
+  scheduledOperationDate String?
+  goodsName              String?
+  duration               String?
+
+  statusUpdates JobModelStatusUpdate[]
+
+  updatedAt DateTime?
+  createdAt DateTime    @default(now())
+  JobReview JobReview[]
+
+  @@map("jobs_model")
+}
+
+model JobReview {
+  id      String   @id @default(uuid())
+  jobId   String
+  job     JobModel @relation(fields: [jobId], references: [id])
+  rating  Int
+  comment String?
+
+  @@map("job_reviews")
+}
+
+model Job {
+  id            String        @id @default(uuid())
+  jId           String        @unique
+  typeId        String
+  name          String
+  type          JobType       @relation(fields: [typeId], references: [id])
+  transportMode TransportMode
+  clientName    String
+  serviceType   String
+
+  expectedDeliveryDate DateTime
+  arrivalTime          String
+  departureTime        String   @default("")
+
+  vehicleType    String
+  vehicleColour  String
+  vehicleNumber  String
+  vehicleTannage String
+
+  driverName        String
+  driverPhoneNumber String
+  transportType     String
+
+  status        JobStatus
+  statusUpdates JobStatusUpdate[]
+
+  description String?
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@map("jobs")
+}
+
+model JobModelStatusUpdate {
+  id          String   @id @default(uuid())
+  jobId       String
+  job         JobModel @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  title       String?
+  description String?
+  completed   Boolean  @default(false)
+  location    Json?
+  time        String?
+  date        String?
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@map("job_model_status_updates")
+}
+
+model JobStatusUpdate {
+  id          String   @id @default(uuid())
+  jobId       String
+  job         Job      @relation(fields: [jobId], references: [id])
+  header      String
+  description String?
+  completed   Boolean  @default(false)
+  location    Json?
+  time        String?
+  date        DateTime
+
+  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now())
+
+  @@map("job_status_updates")
+}
+
+model JobModelType {
+  id          String     @id @default(uuid())
+  name        String     @unique
+  description String?
+  jobs        JobModel[]
+
+  @@map("job_model_types")
+}
+
+model JobType {
+  id   String @id @default(uuid())
+  name String @unique
+  jobs Job[]
+
+  @@map("job_types")
+}
+
+enum TransportMode {
+  Land
+  Air
+  Sea
+}
+
+enum JobStatus {
+  Open
+  InProgress
+  Completed
+  Cancelled
+}
+
+model Notification {
+  id      String           @id @default(uuid())
+  title   String
+  message String
+  type    NotificationType
+  data    Json
+  seen    Boolean          @default(false)
+  userId  String?
+  user    User?            @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("notifications")
+}
+
+enum NotificationType {
+  Job
+  User
+  Department
+  OperationLocation
+  EmailTemplate
+}
+
+model EmailTemplate {
+  id          String            @id @default(uuid())
+  title       String
+  type        EmailTemplateType
+  subject     String
+  body        String
+  attachments Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("email_templates")
+}
+
+enum EmailTemplateType {
+  Email
+  SMS
+}
+
+model File {
+  id       String @id @default(uuid())
+  filename String @unique
+  mimetype String
+  size     Int
+  data     Bytes
+
+  createdAt       DateTime @default(now())
+  emailTemplateId String?
+
+  @@map("files")
+}

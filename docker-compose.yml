@@ -1,0 +1,46 @@
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: prose_frontend
+    expose:
+      - 3000
+    restart: always
+    environment:
+      - NODE_ENV=production
+      - NEXT_PUBLIC_API_URL=http://localhost:8000/api  #https://www.portal.proseintegratedltd.com/api
+      - NEXT_GOOGLE_MAP_API_KEY=${NEXT_GOOGLE_MAP_API_KEY}
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: prose_backend
+    expose:
+      - 8000
+    restart: always
+    environment:
+      NODE_ENV: production
+      PORT: 8000
+    env_file:
+      - .env.production
+    depends_on:
+      - db
+    volumes:
+      - ./backend:/app:cache
+
+  db:
+    image: postgres:16
+    container_name: prose_database
+    restart: always
+    environment:
+      POSTGRES_USER: prose_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ProseDB
+    volumes:
+      - prose_data:/var/lib/postgresql/data
+
+volumes:
+  prose_data:

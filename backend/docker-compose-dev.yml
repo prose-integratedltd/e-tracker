@@ -1,0 +1,44 @@
+services:
+  app:
+    container_name: server
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+
+    ports:
+      - '8000:8000'
+
+    environment:
+      - PORT=8000
+      - NODE_ENV=development
+
+    env_file:
+      - .env.development
+
+    depends_on:
+      - db
+
+    volumes:
+      - .:/app:cache
+
+    command: 'npm run start:dev'
+
+  db:
+    container_name: database
+
+    image: postgres:16
+    restart: always
+
+    ports:
+      - '5432:5432'
+
+    environment:
+      POSTGRES_USER: prose_user
+      POSTGRES_PASSWORD: X9KNjFmfI8uD
+      POSTGRES_DB: prose
+
+    volumes:
+      - prose_data:/var/lib/postgresql/data
+
+volumes:
+  prose_data:
