@@ -29,13 +29,13 @@ const Navbar = ({
 
 			<div className="flex w-full justify-end items-center gap-4">
 				<Link
-					href="#about"
+					href="https://proseintegratedltd.com/about-us/"
 					className="font-poppins font-medium md:text-lg text-sm"
 				>
 					About Us
 				</Link>
 				<Link
-					href="#contact"
+					href="https://proseintegratedltd.com/contact-us/"
 					className="font-poppins font-medium  md:text-lg text-sm"
 				>
 					Contact Us
