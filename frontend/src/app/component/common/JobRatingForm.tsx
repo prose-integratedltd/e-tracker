@@ -21,7 +21,7 @@ const JobRatingForm: React.FC<JobRatingFormProps> = ({ job }) => {
 		return (
 			<div className="px-10 py-5 lg:w-[65%] w-[95%] flex flex-col gap-5 items-center justify-center">
 				<Image
-					src="/positive-vote.png"
+					src="/tracker/positive-vote.png"
 					alt="positive vote"
 					height={89}
 					width={89}

@@ -20,7 +20,7 @@ const Navbar = ({
 		>
 			<Link className="w-[100px] md:w-full" href="/">
 				<Image
-					src={`/logos/${lightLogo ? "home-logo" : "logo"}.png`}
+					src={`/tracker/logos/${lightLogo ? "home-logo" : "logo"}.png`}
 					alt="Prose logo"
 					width={170}
 					height={40}

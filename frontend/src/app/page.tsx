@@ -12,7 +12,7 @@ const Home = () => {
 			<section
 				className="h-[750px] md:px-[10%] px-4 flex flex-col items-center justify-center gap-3 text-white text-center w-full"
 				style={{
-					backgroundImage: "url('/backgrounds/landing-image.png')",
+					backgroundImage: "url('/tracker/backgrounds/landing-image.png')",
 					backgroundSize: "cover",
 					backgroundPosition: "center",
 				}}
@@ -55,17 +55,17 @@ const Home = () => {
 						{
 							title: "Air Freight",
 							desc: "We understand that Air transport services are the most valuable when it comes to moving express shipments around the globe and therefore provide shipment of goods through an air carrier securely",
-							icon: "/svg/air.png",
+							icon: "/tracker/svg/air.png",
 						},
 						{
 							title: "Sea Freight",
 							desc: "We specialize in managing the movement and shipment process for our clients; coordinating the processes so that products/shipments arrive at specified locations in the fastest, safest and most efficient manner possible.",
-							icon: "/svg/sea.png",
+							icon: "/tracker/svg/sea.png",
 						},
 						{
 							title: "Road Freight",
 							desc: "We specialize in managing the movement and transportation process for our clients; coordinating the processes so that products arrive at specified locations in the fastest, safest and most efficient manner possible.",
-							icon: "/svg/road.png",
+							icon: "/tracker/svg/road.png",
 						},
 					].map((service, index) => (
 						<div
@@ -171,13 +171,13 @@ const Home = () => {
 				</div>
 				<div className="mt-10 flex items-center gap-16">
 					<Image
-						src="/logos/image 6.png"
+						src="/tracker/logos/image 6.png"
 						alt=""
 						width={280}
 						height={80}
 					/>
 					<Image
-						src="/logos/image 7.png"
+						src="/tracker/logos/image 7.png"
 						alt=""
 						width={120}
 						height={180}
