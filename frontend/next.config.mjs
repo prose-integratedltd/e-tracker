@@ -2,6 +2,7 @@
 const nextConfig = {
   basePath: "/tracker",
   images: {
+     unoptimized: true,
     remotePatterns: [
       {
         protocol: "https",
