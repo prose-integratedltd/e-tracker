@@ -126,7 +126,7 @@ const Home = () => {
 								/>
 							</svg>
 
-							<p className="font-poppins">prose@logistics.com</p>
+							<p className="font-poppins">admin@proseintegratedltd.com</p>
 						</div>
 						<div className="mt-5 flex gap-2">
 							<svg
@@ -156,13 +156,13 @@ const Home = () => {
 							Headquarters
 						</h3>
 						<Link
-							href="#"
+							href="https://proseintegratedltd.com/about-us/"
 							className="font-poppins font-medium block mt-2 underline"
 						>
 							About Us
 						</Link>
 						<Link
-							href="#"
+							href="https://proseintegratedltd.com/contact-us/"
 							className="font-poppins font-medium block mt-2 underline"
 						>
 							Contact Us
