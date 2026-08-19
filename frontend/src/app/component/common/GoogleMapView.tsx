@@ -23,7 +23,7 @@ type Position = { lat: number; lng: number };
 type ValueSetter<T> = (param: T) => void;
 const API_KEY =
 	process.env.NEXT_GOOGLE_MAP_API_KEY ??
-	"AIzaSyDWixqxCcrFTAhwn9vjbOVDjvXR5f73Hlc";
+	"AIzaSyDlSZfn1gJqZVX3YNF40CVP9p4XHxgGx2c";
 
 const GoogleMapView = ({
 	style,

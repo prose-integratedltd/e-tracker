@@ -3,7 +3,7 @@ import axios from "axios";
 
 const API_KEY =
 	process.env.NEXT_GOOGLE_MAP_API_KEY ??
-	"AIzaSyA2dFJZYU8_1M5ps89Vxt7Yyq8oq4-ZtJ0";
+	"AIzaSyDlSZfn1gJqZVX3YNF40CVP9p4XHxgGx2c";
 
 const searchGooglePlace = ({ input }: { input: string }) => {
 	return axios.get(
