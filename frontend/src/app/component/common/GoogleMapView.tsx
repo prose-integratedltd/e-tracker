@@ -149,7 +149,7 @@ const GoogleMapView = ({
 					<Marker
 						position={position}
 						icon={{
-							url: "/map-marker.png",
+							url: "/tracker/map-marker.png",
 							scaledSize: new google.maps.Size(20, 31),
 						}}
 					/>
