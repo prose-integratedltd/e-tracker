@@ -37,7 +37,7 @@ const Home = () => {
 					<input
 						type="text"
 						name="trackingId"
-						placeholder="PIL-0402251236-4a6f686e"
+						placeholder="TRK-0402251236-4a6f686e"
 						className="w-[80%] h-full bg-white px-4 py-2 text-black placeholder:text-[#979797] outline-none"
 					/>
 					<button className="w-[20%] h-full bg-[#19469D] text-white">
