@@ -161,7 +161,7 @@ const GoogleMapView = ({
 						title={title}
 						position={{ lat: latitude, lng: longitude }}
 						icon={{
-							url: "/path-map-marker.png",
+							url: "/tracker/path-map-marker.png",
 							anchor: new google.maps.Point(30 / 2, 30 / 2),
 							scaledSize: new google.maps.Size(30, 30),
 						}}
